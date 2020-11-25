@@ -6,6 +6,13 @@ import json
 import page_id
 pageList = page_id.IDParser()
 
+def is_digit(str):
+    try:
+        tmp = float(str)
+        return True
+    except ValueError:
+        return False
+
 for pants in pageList[0]:
     pantsInfo = requests.get("https://store.musinsa.com/app/goods/"+str(pants))
     infoSoup = BeautifulSoup(pantsInfo.content, "html.parser")
@@ -16,16 +23,26 @@ for pants in pageList[0]:
     # category(카테고리)
     category = infoSoup.find('p',{'class':'item_categories'}).text.strip().split('>')[1].split()[0]
 
-    # popular(후기)
-    pop = infoSoup.find('a',{'href':'#estimateBox'})    
+    # popular(만족도)
+    pop = infoSoup.find('span',{'class':'rate'})
+    popu = pop.text.split('%')[0]
+
+    if is_digit(popu):
+        popular = popu
+    else:
+        popular = 0
+    
+
+    # sales(후기 수)
+    sell = infoSoup.find('a',{'href':'#estimateBox'})    
     try:
-        numList = re.findall("\d+",pop.text)
+        numList = re.findall("\d+",sell.text)
         strNum =""
         for i in range(len(numList)):
             strNum = strNum+numList[i]
-        popular = strNum
+        sales = strNum
     except AttributeError as e:
-        popular='0'
+        sales='0'
 
     # img(이미지 링크)
     img = infoSoup.find('div', {'class':'product-img'}).find('img').attrs['src']
@@ -36,19 +53,27 @@ for pants in pageList[0]:
     strNum =""
     for i in range(len(numList)):
         strNum = strNum+numList[i]
-
     price = strNum
+
+    # sex(성별)
+    s = infoSoup.find('span', {'class':'txt_gender'})
+    se= s.text.strip()
+    if '남'and'여' in se:
+        sex = 'a'
+    elif '남' in se:
+        sex = 'm'
+    elif '여' in se:
+        sex = 'f'
 
     pantsDic = {
         'id':pants,
         'name':name,
         'category':category,
         'popular':popular,
-        #'sales'못가져옴
+        'sales' : sales,
         'img':img,
-        'price':price
-        #'sex' 못가져옴
-        #'age' 못가져옴
+        'price':price,
+        'sex':sex
     }
 
     json_data = json.dumps(pantsDic,ensure_ascii=False)

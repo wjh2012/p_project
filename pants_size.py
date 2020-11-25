@@ -5,7 +5,6 @@ import json
 import page_id
 pageList = page_id.IDParser()
 
-
 def is_digit(str):
     try:
         tmp = float(str)
@@ -43,7 +42,7 @@ for pants in pageList[0]:
                     'hem':hem
                 }
 
-                json_data = json.dumps(sizeDic,ensure_ascii=False)  
+                json_data = json.dumps(sizeDic,ensure_ascii=False)
 
             else:
                 raise AttributeError            
@@ -52,4 +51,3 @@ for pants in pageList[0]:
 
     except AttributeError as e1:
         print(pants+' e1 None')
-

@@ -5,6 +5,6 @@ import re
 pantsInfo = requests.get("https://store.musinsa.com/app/goods/1149328")
 infoSoup = BeautifulSoup(pantsInfo.content, "html.parser")
 
-sales = infoSoup.find('strong',{'id':'sales_1y_qty'})
+pop = infoSoup.find('span',{'class':'rate'})
 
-print(sales)
+print(pop.text.split('%')[0])
