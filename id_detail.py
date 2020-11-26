@@ -30,7 +30,7 @@ for pants in pageList[0]:
     if is_digit(popu):
         popular = popu
     else:
-        popular = 0
+        popular = "0"
     
 
     # sales(후기 수)
