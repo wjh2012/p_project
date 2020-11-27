@@ -3,18 +3,16 @@ from bs4 import BeautifulSoup
 import re
 import json
 
-import page_id
-pageList = page_id.IDParser()
+def getInfo(pantsID):
 
-def is_digit(str):
-    try:
-        tmp = float(str)
-        return True
-    except ValueError:
-        return False
+    def is_digit(str):
+        try:
+            tmp = float(str)
+            return True
+        except ValueError:
+            return False
 
-for pants in pageList[0]:
-    pantsInfo = requests.get("https://store.musinsa.com/app/goods/"+str(pants))
+    pantsInfo = requests.get("https://store.musinsa.com/app/goods/"+str(pantsID))
     infoSoup = BeautifulSoup(pantsInfo.content, "html.parser")
 
     # name(제품명)
@@ -31,7 +29,7 @@ for pants in pageList[0]:
         popular = popu
     else:
         popular = "0"
-    
+        
 
     # sales(후기 수)
     sell = infoSoup.find('a',{'href':'#estimateBox'})    
@@ -66,7 +64,7 @@ for pants in pageList[0]:
         sex = 'f'
 
     pantsDic = {
-        'id':pants,
+        'id':pantsID,
         'name':name,
         'category':category,
         'popular':popular,
@@ -75,7 +73,5 @@ for pants in pageList[0]:
         'price':price,
         'sex':sex
     }
-
-    json_data = json.dumps(pantsDic,ensure_ascii=False)
-    
-    print(json_data)
+            
+    return (pantsDic)

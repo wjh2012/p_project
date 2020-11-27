@@ -33,5 +33,5 @@ def IDParser():
                 IDList.append(ID.attrs['data-no'])
 
         page.append(IDList)
-    
+        
     return page
