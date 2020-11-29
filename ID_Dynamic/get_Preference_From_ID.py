@@ -22,10 +22,10 @@ def getPreference(pantsID):
 
     for prefer in result:
         if prefer.text:
-            preference.append(prefer.text.split("%")[0])
+            preference.append(int(prefer.text.split("%")[0]))
         
     print(pantsID)
-    print(preference)
+    print(preference.index(max(preference))+1)
 
 getPreference(1357807)
 
