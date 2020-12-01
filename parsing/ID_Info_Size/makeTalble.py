@@ -23,7 +23,6 @@ try:
             img nvarchar(200),
             price int,
             sex nvarchar(1),
-            age int,
             PRIMARY KEY(id)
         );
     '''          
