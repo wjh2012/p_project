@@ -31,11 +31,13 @@ try:
     pants_sizeSql = '''
         CREATE TABLE pants_size(
             id int,
+            num int,
             length float,
             waist float,
             thigh float,
             rise float,
             hem float,
+            PRIMARY KEY(id, num),
             FOREIGN KEY(id) REFERENCES pants(id) on delete cascade
         );
     '''

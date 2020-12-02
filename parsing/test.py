@@ -35,4 +35,4 @@ def getSize(pantsID):
                     }
                     pantsSizeList.append(sizeDic)
         
-        return pantsSizeList
+        print(pantsSizeList)

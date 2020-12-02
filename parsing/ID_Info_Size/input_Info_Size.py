@@ -38,11 +38,11 @@ def inputSize(sizeDic):
         cursor = conn.cursor()
 
         sql = """
-            INSERT INTO pants_size (id, length, waist, thigh, rise, hem)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO pants_size (id, num, length, waist, thigh, rise, hem)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
 
-        data = (int(sizeDic["id"]), float(sizeDic["length"]), float(sizeDic["waist"]),float(sizeDic["thigh"]),float(sizeDic["rise"]),float(sizeDic["hem"]))
+        data = (int(sizeDic["id"]), int(sizeDic["num"]), float(sizeDic["length"]), float(sizeDic["waist"]),float(sizeDic["thigh"]),float(sizeDic["rise"]),float(sizeDic["hem"]))
 
         cursor.execute(sql, data)
 
@@ -68,6 +68,7 @@ pagenum = 1
 
 for page in IDList:
     print("page : ",pagenum)
+    
     for pantsID in page:
         inputInfo(getInfo(pantsID))
     pagenum = pagenum+1
