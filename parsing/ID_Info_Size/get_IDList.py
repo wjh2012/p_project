@@ -14,8 +14,10 @@ def IDParser():
 
     page = [] # 이중 리스트로 구현
     # pantsLinkList 하나씩 접근 후 페이지마다 ID 크롤링
+    
+    need = 3
 
-    for i in range(2):
+    for i in range(need-1):
         pantsLink = "https://search.musinsa.com/category/003?device=&d_cat_cd=003&brand=&rate=&page_kind=search&list_kind=small&sort=pop&sub_sort=&page="+str(i+1)+"&display_cnt=90&sale_goods=&ex_soldout=&color=&price1=&price2=&exclusive_yn=&size=&tags=&sale_campaign_yn=&timesale_yn=&q="
 
         IDList = []

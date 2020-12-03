@@ -26,7 +26,7 @@ def getSize(pantsID):
                 if len(sizeList)>4:
                     sizeDic = {
                         'id':pantsID,
-                        'num':i,
+                        'num':i-2,
                         'length':sizeList[0],
                         'waist':sizeList[1],
                         'thigh':sizeList[2],
