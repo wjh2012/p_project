@@ -7,7 +7,7 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
     user : "root",
-    password : "gh175366",
+    password : "비밀번호",
     host:"127.0.0.1",
     database : "fit",
     port:"3306"
@@ -58,7 +58,15 @@ app.get('/mysize/:length/:waist/:thigh/:rise/:hem', (req, ress) => {
         }
         console.log(`Status: ${res.statusCode}`);
         console.log('mobile server send to AI server : ',options.body);
-        ress.send(body)
+        
+        var sql = 'SELECT * FROM pants WHERE id in (SELECT DISTINCT id FROM pants_size where model_group='+String(body)+')'
+        connection.query(sql, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+
+            ress.json(result)
+        })
     });
 
 })

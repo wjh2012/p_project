@@ -81,4 +81,3 @@ for page in IDList:
             for size in getSize(pantsID):
                 inputSize(size)
     pagenum = pagenum+1
-   

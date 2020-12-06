@@ -37,6 +37,7 @@ try:
             thigh float,
             rise float,
             hem float,
+            model_group int default 0,
             PRIMARY KEY(id, num),
             FOREIGN KEY(id) REFERENCES pants(id) on delete cascade
         );
