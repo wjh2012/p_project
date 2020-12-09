@@ -69,7 +69,7 @@ app.get('/mysize/:length/:waist/:thigh/:rise/:hem/:order/:sex', (req, ress) => {
         }
         console.log(`Status: ${res.statusCode}`);
         console.log('mobile server send to AI server : ',options.body);
-        
+        console.log('AI sever send to mobile server : ',body)
         if (String(order)=='price'){
             var sql = 'SELECT * FROM pants WHERE sex = "'+String(sex)+'" AND id in (SELECT DISTINCT id FROM pants_size where model_group='+String(body)+')' + ' order by '+ String(order)
         }
@@ -81,7 +81,6 @@ app.get('/mysize/:length/:waist/:thigh/:rise/:hem/:order/:sex', (req, ress) => {
             if (err) {
                 console.log(err)
             }
-
             ress.json(result)
         })
     });
