@@ -5,6 +5,8 @@ from get_IDList import IDParser
 from get_Info_From_ID import getInfo
 from get_Size_From_ID import getSize
 
+import time
+
 def inputInfo(pantsDic):
     try:
         print(pantsDic)
@@ -61,23 +63,28 @@ config = {
     "port":"3306"
 }
 
-# 아이디 리스트 가져오기
-IDList = IDParser()
+if __name__=='__main__':
+    start_time = time.time()
+    # 아이디 리스트 가져오기
+    IDList = IDParser()
 
-pagenum = 1
+    pagenum = 1
 
-for page in IDList:
-    print("page : ",pagenum)
-    
-    for pantsID in page:
-        inputInfo(getInfo(pantsID))
-    pagenum = pagenum+1
+    for page in IDList:
+        print("page : ",pagenum)
+        
+        for pantsID in page:
+            inputInfo(getInfo(pantsID))
+        pagenum = pagenum+1
 
-pagenum = 1
-for page in IDList:
-    print("page : ",pagenum)
-    for pantsID in page:
-        if getSize(pantsID) is not None:
-            for size in getSize(pantsID):
-                inputSize(size)
-    pagenum = pagenum+1
+    print("--- %s seconds ---" % (time.time() - start_time))
+    """
+    pagenum = 1
+    for page in IDList:
+        print("page : ",pagenum)
+        for pantsID in page:
+            if getSize(pantsID) is not None:
+                for size in getSize(pantsID):
+                    inputSize(size)
+        pagenum = pagenum+1
+    """
